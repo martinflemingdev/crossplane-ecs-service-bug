@@ -1,0 +1,32 @@
+apiVersion: ecs.aws.crossplane.io/v1alpha1
+kind: TaskDefinition
+metadata:
+  labels:
+    testing.upbound.io/example-name: sample-app-task
+  name: sample-app-task
+spec:
+  forProvider:
+    family: example-task-definition
+    cpu: "1024"
+    memory: "2048"
+    networkMode: awsvpc
+    requiresCompatibilities:
+      - FARGATE
+    executionRoleARNSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ecs-role
+    taskRoleARNSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ecs-role
+    region: us-east-1
+    containerDefinitions:
+      - name: sample-app-container
+        image: hub.docker.com/r/nginxdemos/hello:latest
+        cpu: 0
+        image: nginxdemos/hello
+        memoryReservation: 2048
+        essential: true
+        portMappings:
+          - containerPort: 80
+            hostPort: 80
+            protocol: tcp
