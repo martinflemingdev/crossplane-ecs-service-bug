@@ -6,9 +6,9 @@ metadata:
   name: sample-app-task
 spec:
   forProvider:
-    family: example-task-definition
-    cpu: "1024"
-    memory: "2048"
+    family: example-task-definition-nginx
+    cpu: "2048"
+    memory: "4096"
     networkMode: awsvpc
     requiresCompatibilities:
       - FARGATE
@@ -21,7 +21,7 @@ spec:
     region: us-east-1
     containerDefinitions:
       - name: sample-app-container
-        image: hub.docker.com/r/nginxdemos/hello:latest
+        image: nginxdemos/hello
         cpu: 256
         memoryReservation: 512
         essential: true
