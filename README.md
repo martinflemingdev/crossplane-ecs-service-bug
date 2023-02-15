@@ -1,4 +1,4 @@
-# ECS Service updates do not trigger a new deployment
+# Updates to Crossplane's ECS Service managed resource do not trigger a new deployment
 
 ## What happened?
 After creating an ECS Service, I am unable to change the initially set desiredCount in the provisioned resource.  
