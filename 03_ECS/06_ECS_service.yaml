@@ -6,11 +6,19 @@ metadata:
   name: sample-app-service
 spec:
   forProvider:
+    desiredCount: 1
+    deploymentController:
+      type_: ECS
+    deploymentConfiguration:
+      maximumPercent: 200
+      minimumHealthyPercent: 0
+    launchType: FARGATE
+    region: us-east-1
+    schedulingStrategy: REPLICA
+    platformVersion: 1.4.0 
     clusterSelector:
       matchLabels:
         testing.upbound.io/example-name: sample-app-cluster
-    desiredCount: 2
-    launchType: FARGATE
     loadBalancers:
     - containerName: sample-app-container
       containerPort: 80
@@ -26,14 +34,6 @@ spec:
         subnetSelector:
           matchLabels:
             all-subnets: included
-    region: us-east-1
-    schedulingStrategy: REPLICA
-    platformVersion: 1.4.0 
     taskDefinitionSelector:
       matchLabels:
         testing.upbound.io/example-name: sample-app-task
-    deploymentController:
-      type_: ECS
-    deploymentConfiguration:
-      maximumPercent: 100
-      minimumHealthyPercent: 50
