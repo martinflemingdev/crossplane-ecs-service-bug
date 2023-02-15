@@ -22,9 +22,8 @@ spec:
     containerDefinitions:
       - name: sample-app-container
         image: hub.docker.com/r/nginxdemos/hello:latest
-        cpu: 0
-        image: nginxdemos/hello
-        memoryReservation: 2048
+        cpu: 256
+        memoryReservation: 512
         essential: true
         portMappings:
           - containerPort: 80
